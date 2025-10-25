@@ -217,7 +217,8 @@ public class MenuFragment extends Fragment {
     }
 
     private void navigateToProfile() {
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        // Abrir directamente la edición de perfil
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
         startActivity(intent);
     }
 

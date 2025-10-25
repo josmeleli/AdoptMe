@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:textSize="24sp"
+            android:textColor="#3A538D"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Sección: Datos Personales -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATOS PERSONALES"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Nombres -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombres"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/editText_nombres"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="textPersonName"
+                android:hint="Ingresa tus nombres"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:background="#F8F9FA"
+                android:textColor="#333333"
+                android:textColorHint="#999999" />
+        </LinearLayout>
+
+        <!-- Apellidos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/editText_apellidos"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="textPersonName"
+                android:hint="Ingresa tus apellidos"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:background="#F8F9FA"
+                android:textColor="#333333"
+                android:textColorHint="#999999" />
+        </LinearLayout>
+
+        <!-- Teléfono -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/editText_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="phone"
+                android:hint="987654321"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:background="#F8F9FA"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:maxLength="9" />
+        </LinearLayout>
+
+        <!-- Distrito -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distrito"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/editText_distrito"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:inputType="text"
+                android:hint="Ej: San Isidro, Miraflores"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:background="#F8F9FA"
+                android:textColor="#333333"
+                android:textColorHint="#999999" />
+        </LinearLayout>
+
+        <!-- Sección: Preferencias -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PREFERENCIAS DE MASCOTAS"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Especie Preferida -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Especie Preferida"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spinner_especie"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#F8F9FA"
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <!-- Tamaño Preferido -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamaño Preferido"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spinner_tamano"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#F8F9FA"
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <!-- Edad Preferida -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"
+            android:elevation="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad Preferida"
+                android:textSize="12sp"
+                android:textColor="#3A538D"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <Spinner
+                android:id="@+id/spinner_edad"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#F8F9FA"
+                android:padding="10dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="GUARDAR CAMBIOS"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:backgroundTint="#3A538D"
+            android:elevation="6dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Botón Cancelar -->
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="CANCELAR"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:backgroundTint="#EEEEEE" />
+
+    </LinearLayout>
+
+</ScrollView>
+

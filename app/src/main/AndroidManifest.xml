@@ -75,6 +75,9 @@
         android:name=".ui.menu.ProfileActivity"
         android:exported="false" />
     <activity
+        android:name=".ui.menu.EditProfileActivity"
+        android:exported="false" />
+    <activity
         android:name=".ui.menu.SettingsActivity"
         android:exported="false" />
     <activity
