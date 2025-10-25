@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Imagen con badge urgente -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <ImageView
+                android:id="@+id/pet_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Foto mascota" />
+
+            <!-- Badge URGENTE -->
+            <TextView
+                android:id="@+id/urgent_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="#FF5252"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="URGENTE"
+                android:textColor="@android:color/white"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <!-- Información -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/pet_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Especie y Raza -->
+            <TextView
+                android:id="@+id/pet_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perro • Mestizo"
+                android:textColor="#666666"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Edad -->
+            <TextView
+                android:id="@+id/pet_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 años"
+                android:textColor="#999999"
+                android:textSize="11sp"
+                android:layout_marginTop="2dp" />
+
+            <!-- Distrito -->
+            <TextView
+                android:id="@+id/pet_distrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍 San Miguel"
+                android:textColor="#999999"
+                android:textSize="10sp"
+                android:layout_marginTop="2dp" />
+
+            <!-- Botón Adoptar -->
+            <Button
+                android:id="@+id/btn_adopt"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:text="Adoptar"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
+                android:backgroundTint="#4A6FA5"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.Material3.Button" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
