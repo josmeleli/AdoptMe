@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:name=".MyApp"
+    android:allowBackup="true"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.AdoptMeV5">
+
+    <!-- Pantalla inicial -->
+    <activity
+        android:name=".SplashScreen"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+    <!-- Actividad principal -->
+    <activity
+        android:name=".MainActivity"
+        android:exported="false" />
+
+    <!-- Login y registro -->
+    <activity
+        android:name=".LoginActivity"
+        android:exported="false" />
+    <activity
+        android:name=".RegisterActivity"
+        android:exported="false" />
+
+
+
+        <activity android:name=".ui.search.PetDetailActivity"
+            android:exported="false" />
+
+    <!-- Navbar -->
+    <activity
+        android:name=".NavbarActivity"
+        android:exported="false"
+        android:label="@string/title_activity_navbar" />
+
+    <!-- Menú de configuración -->
+    <activity
+        android:name=".ui.menu.ThemeActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.NotifyActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.AccesibilityActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.FilterActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.UbicationActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.CompatibilityActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.ProfileActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.SettingsActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.HelpActivity"
+        android:exported="false" />
+    <activity
+        android:name=".ui.menu.AboutActivity"
+        android:exported="false" />
+
+</application>
+    </manifest>

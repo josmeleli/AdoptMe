@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Rabbit body -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,20C15.31,20 18,17.31 18,14C18,10.69 15.31,8 12,8S6,10.69 6,14C6,17.31 8.69,20 12,20z"/>
+
+    <!-- Rabbit head -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,8C14.21,8 16,6.21 16,4S14.21,0 12,0S8,2.21 8,4S9.79,8 12,8z"/>
+
+    <!-- Long rabbit ears -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M9,7C8.5,7 8,6.5 8,6V2C8,1.5 8.5,1 9,1S10,1.5 10,2V6C10,6.5 9.5,7 9,7z"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M15,7C15.5,7 16,6.5 16,6V2C16,1.5 15.5,1 15,1S14,1.5 14,2V6C14,6.5 14.5,7 15,7z"/>
+
+    <!-- Rabbit eyes -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M10,5C9.45,5 9,4.55 9,4S9.45,3 10,3S11,3.45 11,4S10.55,5 10,5z"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M14,5C13.45,5 13,4.55 13,4S13.45,3 14,3S15,3.45 15,4S14.55,5 14,5z"/>
+
+    <!-- Rabbit nose -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,6.5C11.72,6.5 11.5,6.28 11.5,6S11.72,5.5 12,5.5S12.5,5.72 12.5,6S12.28,6.5 12,6.5z"/>
+
+    <!-- Rabbit tail -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M18,16C18.55,16 19,16.45 19,17S18.55,18 18,18S17,17.55 17,17S17.45,16 18,16z"/>
+</vector>

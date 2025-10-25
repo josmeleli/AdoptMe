@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Test de Compatibilidad"
+        android:textColor="#333333"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Descripción -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:text="¿Deseas realizar el test para encontrar la mascota ideal para ti?"
+        android:textColor="#555555"
+        android:textSize="16sp"
+        android:layout_marginBottom="40dp" />
+
+    <!-- Botones de acción -->
+    <Button
+        android:id="@+id/btn_start_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sí, comenzar"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:background="#4CAF50"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btn_skip_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No, gracias"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:background="#9E9E9E"
+        android:padding="12dp" />
+
+</LinearLayout>

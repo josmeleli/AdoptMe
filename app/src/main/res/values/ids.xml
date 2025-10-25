@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="search_container" type="id"/>
+    <item name="search_edit_text" type="id"/>
+    <item name="category_dog" type="id"/>
+    <item name="category_cat" type="id"/>
+    <item name="category_bird" type="id"/>
+    <item name="category_rabbit" type="id"/>
+    <item name="pet_card_canela" type="id"/>
+    <item name="btn_adopt_canela" type="id"/>
+    <item name="pet_card_sebas" type="id"/>
+    <item name="btn_adopt_sebas" type="id"/>
+    <item name="pet_card_caramelo" type="id"/>
+    <item name="btn_adopt_caramelo" type="id"/>
+    <item name="pet_card_tigrillo" type="id"/>
+    <item name="btn_adopt_tigrillo" type="id"/>
+    <item name="pet_card_pablo" type="id"/>
+    <item name="btn_adopt_pablo" type="id"/>
+    <item name="pet_card_mascota" type="id"/>
+    <item name="btn_adopt_mascota" type="id"/>
+</resources>

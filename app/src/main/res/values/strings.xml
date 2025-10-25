@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AdoptMeV5</string>
+    <string name="title_activity_navbar">NavbarActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_maps">Maps</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_search">Search</string>
+</resources>

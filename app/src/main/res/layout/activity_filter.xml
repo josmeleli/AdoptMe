@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:id="@+id/main"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_revert"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Filtros de Mascotas"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginLeft="16dp" />
+
+        </LinearLayout>
+
+        <!-- Tipos de Mascotas -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tipos de Mascotas"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333"
+                    android:paddingBottom="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona los tipos de mascotas que te interesan"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:paddingBottom="16dp" />
+
+                <CheckBox
+                    android:id="@+id/cb_perro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Perros"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_gato"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gatos"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_conejo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Conejos"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/cb_ave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aves"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/cb_reptil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reptiles"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Rango de Edad -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rango de Edad"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333"
+                    android:paddingBottom="12dp" />
+
+                <CheckBox
+                    android:id="@+id/cb_cachorro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cachorro/Cría (0-1 año)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_joven"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Joven (1-3 años)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_adulto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adulto (3-7 años)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_senior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Senior (7+ años)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Tamaño -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tamaño"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333"
+                    android:paddingBottom="12dp" />
+
+                <CheckBox
+                    android:id="@+id/cb_pequeno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pequeño (hasta 10kg)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_mediano"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mediano (10-25kg)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="true" />
+
+                <CheckBox
+                    android:id="@+id/cb_grande"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grande (25-40kg)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+                <CheckBox
+                    android:id="@+id/cb_gigante"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gigante (40kg+)"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:checked="false" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

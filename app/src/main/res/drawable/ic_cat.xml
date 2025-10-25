@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Cat face -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,2C8.69,2 6,4.69 6,8V12C6,15.31 8.69,18 12,18S18,15.31 18,12V8C18,4.69 15.31,2 12,2zM9,10C8.45,10 8,9.55 8,9S8.45,8 9,8S10,8.45 10,9S9.55,10 9,10zM15,10C14.45,10 14,9.55 14,9S14.45,8 15,8S16,8.45 16,9S15.55,10 15,10z"/>
+
+    <!-- Cat ears -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M8,2L6,6L10,4L8,2z"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16,2L18,6L14,4L16,2z"/>
+
+    <!-- Cat whiskers -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M4,11L7,12L4,13z"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M20,11L17,12L20,13z"/>
+
+    <!-- Cat nose and mouth -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,12L11,13L12,14L13,13L12,12z"/>
+
+    <!-- Cat tail -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,18C12,18 14,20 16,22C17,21 15,19 12,18z"/>
+</vector>

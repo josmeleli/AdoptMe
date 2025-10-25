@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.search.SearchFragment">
+
+    <TextView
+        android:id="@+id/text_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Content ScrollView -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Search Bar Clickeable -->
+                <LinearLayout
+                    android:id="@+id/search_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/search_background"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_search_black" />
+
+                    <EditText
+                        android:id="@+id/search_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:background="@android:color/transparent"
+                        android:hint="Buscar mascotas..."
+                        android:textColorHint="#999999"
+                        android:textColor="#333333"
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:imeOptions="actionSearch" />
+
+                </LinearLayout>
+
+                <!-- Categories Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Categorías"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Categories Grid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp">
+
+                    <LinearLayout
+                        android:id="@+id/category_dog"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/category_background"
+                        android:backgroundTint="#4A6FA5"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_dog" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Perro"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/category_cat"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/category_background"
+                        android:backgroundTint="#4A6FA5"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_cat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gato"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/category_bird"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/category_background"
+                        android:backgroundTint="#4A6FA5"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_bird" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ave"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/category_rabbit"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/category_background"
+                        android:backgroundTint="#4A6FA5"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_rabbit" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Conejo"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Featured Pets Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mascotas destacadas"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- First Row of Pets -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Pet Card 1 - Canela -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_canela"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search1"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Canela"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_canela"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                    <!-- Pet Card 2 - Sebas -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_sebas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search2"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sebas"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_sebas"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                    <!-- Pet Card 3 - Caramelo -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_caramelo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search3"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Caramelo"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_caramelo"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Second Row of Pets -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Pet Card 4 - Tigrillo -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_tigrillo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search4"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tigrillo"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_tigrillo"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                    <!-- Pet Card 5 - Pablo -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_pablo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search5"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pablo"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_pablo"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                    <!-- Pet Card 6 - Mascota -->
+                    <LinearLayout
+                        android:id="@+id/pet_card_mascota"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/search6"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/rounded_corners" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mascota"
+                            android:textColor="#333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <Button
+                            android:id="@+id/btn_adopt_mascota"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:text="Adoptar"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:backgroundTint="#4A6FA5"
+                            android:layout_marginTop="8dp"
+                            style="@style/Widget.Material3.Button" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

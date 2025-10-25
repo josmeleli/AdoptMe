@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.maps.MapsFragment">
+
+    <!-- Mock Map Background -->
+    <ImageView
+        android:id="@+id/mock_map_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/mock_map_background"
+        android:scaleType="centerCrop" />
+
+    <!-- Pet Markers Container -->
+    <FrameLayout
+        android:id="@+id/markers_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Pet Marker 1 - Canela -->
+        <ImageView
+            android:id="@+id/marker_canela"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="250dp"
+            android:src="@drawable/dog_marker"
+            android:contentDescription="Canela - Perro" />
+
+        <!-- Pet Marker 2 - Sebas -->
+        <ImageView
+            android:id="@+id/marker_sebas"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="180dp"
+            android:src="@drawable/cat_marker"
+            android:contentDescription="Sebas - Gato" />
+
+        <!-- Pet Marker 3 - Caramelo -->
+        <ImageView
+            android:id="@+id/marker_caramelo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="320dp"
+            android:src="@drawable/dog_marker"
+            android:contentDescription="Caramelo - Perro" />
+
+        <!-- Pet Marker 4 - Tigrillo -->
+        <ImageView
+            android:id="@+id/marker_tigrillo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="180dp"
+            android:src="@drawable/cat_marker"
+            android:contentDescription="Tigrillo - Gato" />
+
+        <!-- Pet Marker 5 - Pablo -->
+        <ImageView
+            android:id="@+id/marker_pablo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="280dp"
+            android:src="@drawable/bird_marker"
+            android:contentDescription="Pablo - Ave" />
+
+        <!-- User Location Marker -->
+        <ImageView
+            android:id="@+id/user_location_marker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="250dp"
+            android:src="@drawable/user_location_marker"
+            android:contentDescription="Tu ubicación" />
+
+    </FrameLayout>
+
+    <!-- Top Search Container -->
+    <LinearLayout
+        android:id="@+id/search_container_maps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_white_background"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Search EditText -->
+        <EditText
+            android:id="@+id/search_edit_text_maps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Buscar mascotas cerca..."
+            android:inputType="text"
+            android:textSize="16sp"
+            android:textColorHint="#999999" />
+
+        <!-- Search Button -->
+        <ImageButton
+            android:id="@+id/btn_search_maps"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_search"
+            android:contentDescription="Buscar mascotas" />
+
+    </LinearLayout>
+
+    <!-- Filter Buttons Container -->
+    <LinearLayout
+        android:id="@+id/filter_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_container_maps"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_white_background"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btn_filter_dogs"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/filter_button_selector"
+            android:text="Perros"
+            android:textSize="12sp"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_filter_cats"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/filter_button_selector"
+            android:text="Gatos"
+            android:textSize="12sp"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_filter_birds"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/filter_button_selector"
+            android:text="Aves"
+            android:textSize="12sp"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_filter_all"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/filter_button_selector"
+            android:text="Todos"
+            android:textSize="12sp"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <!-- Pet Info Card (initially hidden) -->
+    <LinearLayout
+        android:id="@+id/pet_info_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_white_background"
+        android:elevation="6dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/pet_info_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/pet_placeholder"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pet_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre Mascota"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/pet_info_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo"
+                android:textSize="14sp"
+                android:textColor="#666666" />
+
+            <TextView
+                android:id="@+id/pet_info_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.5 km"
+                android:textSize="12sp"
+                android:textColor="#999999" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_view_pet"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/filter_button_selector"
+            android:text="Ver"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+    </LinearLayout>
+
+    <!-- My Location Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_my_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="16dp"
+        android:src="@android:drawable/ic_menu_mylocation"
+        android:contentDescription="Mi ubicación" />
+
+    <!-- Pet List Toggle Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="16dp"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:contentDescription="Ver lista" />
+
+    <!-- Distance Indicator -->
+    <TextView
+        android:id="@+id/tv_distance_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/rounded_white_background"
+        android:elevation="4dp"
+        android:padding="8dp"
+        android:text="Radio: 5 km"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
+    <!-- Loading Progress -->
+    <ProgressBar
+        android:id="@+id/progress_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>
