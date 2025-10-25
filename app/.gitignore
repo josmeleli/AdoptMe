@@ -1,1 +1,9 @@
-/build
+# Ignore build outputs
+build/
+
+# Ignore the docs package under Java sources for this module
+/src/main/java/com/example/adoptmev5/docs/
+
+# Optional: ignore any docs folders anywhere (uncomment if desired)
+# **/docs/
+

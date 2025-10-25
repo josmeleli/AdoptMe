@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="28dp"
+    android:background="#F5F7FA">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verificar cuenta"
+        android:textSize="22sp"
+        android:textColor="#3A538D"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingresa el código de verificación enviado a tu correo"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="12dp" />
+
+    <EditText
+        android:id="@+id/editText_code"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:inputType="number"
+        android:hint="Código (6 dígitos)"
+        android:padding="12dp"
+        android:background="#FFFFFF" />
+
+    <Button
+        android:id="@+id/button_verify"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="VERIFICAR"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#3A538D"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/button_skip"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="VOLVER AL LOGIN"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#CCCCCC"
+        android:textColor="#333333" />
+
+</LinearLayout>
