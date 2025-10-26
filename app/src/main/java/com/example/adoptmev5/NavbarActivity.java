@@ -1,14 +1,13 @@
 package com.example.adoptmev5;
-import com.example.adoptmev5.ui.menu.ThemeActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,15 +17,22 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.adoptmev5.api.NotificationApiService;
 import com.example.adoptmev5.databinding.ActivityNavbarBinding;
+import com.example.adoptmev5.models.Notification;
+import com.example.adoptmev5.ui.notifications.NotificationsActivity;
+
+import java.util.List;
 
 public class NavbarActivity extends AppCompatActivity {
 
+    private static final String TAG = "NavbarActivity";
     private ActivityNavbarBinding binding;
     private TextView toolbarTitle;
-    private ImageButton btnNotifications;
     private TextView notificationBadge;
     private int notificationCount = 0;
+    private int userId;
+    private String userRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +41,29 @@ public class NavbarActivity extends AppCompatActivity {
         binding = ActivityNavbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Obtener datos del usuario
+        SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
+        userId = prefs.getInt("user_id", 0);
+        userRole = prefs.getString("user_role", "user");
+
+        Log.d(TAG, "Usuario: " + userId + ", Role: " + userRole);
+
         // Configurar Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false); // Ocultar título por defecto
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         // Referencias a vistas del AppBar
         toolbarTitle = findViewById(R.id.toolbar_title);
-        btnNotifications = findViewById(R.id.btn_notifications);
+        ImageButton btnNotifications = findViewById(R.id.btn_notifications);
         notificationBadge = findViewById(R.id.notification_badge);
 
         // Configurar botón de notificaciones
         btnNotifications.setOnClickListener(v -> {
-            Toast.makeText(this, "Notificaciones (" + notificationCount + ")", Toast.LENGTH_SHORT).show();
-            // TODO: Abrir activity de notificaciones
+            Intent intent = new Intent(NavbarActivity.this, NotificationsActivity.class);
+            startActivity(intent);
         });
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -82,8 +95,52 @@ public class NavbarActivity extends AppCompatActivity {
             }
         });
 
-        // Inicialmente sin notificaciones (se actualizará desde el API)
-        updateNotificationBadge(0);
+        // Cargar notificaciones si es admin
+        loadNotifications();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Recargar notificaciones al volver
+        loadNotifications();
+    }
+
+    /**
+     * Cargar notificaciones desde el API
+     */
+    private void loadNotifications() {
+        if (userId == 0) return;
+
+        // Solo cargar notificaciones para admins
+        if (!"admin".equals(userRole)) {
+            updateNotificationBadge(0);
+            return;
+        }
+
+        NotificationApiService.getNotifications(userId, new NotificationApiService.NotificationsCallback() {
+            @Override
+            public void onSuccess(List<Notification> notifications) {
+                // Contar solo las no leídas
+                int unreadCount = 0;
+                for (Notification n : notifications) {
+                    if (!n.isRead()) {
+                        unreadCount++;
+                    }
+                }
+
+                Log.d(TAG, "Notificaciones no leídas: " + unreadCount);
+
+                int finalUnreadCount = unreadCount;
+                runOnUiThread(() -> updateNotificationBadge(finalUnreadCount));
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e(TAG, "Error al cargar notificaciones: " + error);
+                runOnUiThread(() -> updateNotificationBadge(0));
+            }
+        });
     }
 
     /**
