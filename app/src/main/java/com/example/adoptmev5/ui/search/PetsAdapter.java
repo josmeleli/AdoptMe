@@ -114,7 +114,7 @@ public class PetsAdapter extends RecyclerView.Adapter<PetsAdapter.PetViewHolder>
          */
         private int getPlaceholderByEspecie(String especie) {
             if (especie == null) return R.drawable.search1;
-
+            
             if (especie.equalsIgnoreCase("Perro")) {
                 return R.drawable.search1;
             } else if (especie.equalsIgnoreCase("Gato")) {

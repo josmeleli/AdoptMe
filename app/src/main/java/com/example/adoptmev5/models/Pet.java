@@ -1,7 +1,7 @@
 package com.example.adoptmev5.models;
 
 public class Pet {
-    private int id;
+    private String id;
     private String name;
     private String especie;
     private String raza;
@@ -23,7 +23,7 @@ public class Pet {
     }
 
     // Getters
-    public int getId() { return id; }
+    public String getId() { return id; }
     public String getName() { return name; }
     public String getEspecie() { return especie; }
     public String getRaza() { return raza; }
@@ -41,7 +41,7 @@ public class Pet {
     public String getCategoriaEdad() { return categoria_edad; }
 
     // Setters
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setEspecie(String especie) { this.especie = especie; }
     public void setRaza(String raza) { this.raza = raza; }
