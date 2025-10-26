@@ -100,5 +100,19 @@
         android:name=".VerifyActivity"
         android:exported="false" />
 
+    <!-- Chat Activities -->
+    <activity
+        android:name=".ChatActivity"
+        android:exported="false" />
+    <activity
+        android:name=".UserChatActivity"
+        android:exported="false" />
+    <activity
+        android:name=".AdminUsersListActivity"
+        android:exported="false" />
+    <activity
+        android:name=".AdminChatActivity"
+        android:exported="false" />
+
 </application>
     </manifest>

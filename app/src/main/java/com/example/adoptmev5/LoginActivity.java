@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userEmail = user.optString("email", "");
                         String telefono = user.optString("telefono", "");
                         String dni = user.optString("dni", "");
+                        String role = user.optString("role", "user");
 
                         // Guardar todos los datos del usuario en SharedPreferences
                         SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
@@ -109,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("email", userEmail);
                         editor.putString("telefono", telefono);
                         editor.putString("dni", dni);
+                        editor.putString("role", role);
                         editor.apply();
 
                         runOnUiThread(() -> {

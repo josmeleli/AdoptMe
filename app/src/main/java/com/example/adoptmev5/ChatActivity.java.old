@@ -1,0 +1,260 @@
+package com.example.adoptmev5;
+
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.adoptmev5.adapters.MessagesAdapter;
+import com.example.adoptmev5.models.Message;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ChatActivity extends AppCompatActivity {
+
+    private RecyclerView messagesRecycler;
+    private TextInputEditText messageInput;
+    private MaterialButton sendButton;
+    private ProgressBar loadingProgress;
+    private MaterialToolbar toolbar;
+
+    private MessagesAdapter adapter;
+    private List<Message> messagesList;
+    private RequestQueue requestQueue;
+
+    private int currentUserId;
+    private String currentUserRole;
+    private int otherUserId = -1; // Solo para admin
+
+    private Handler refreshHandler;
+    private Runnable refreshRunnable;
+    private static final int REFRESH_INTERVAL = 5000; // 5 segundos
+
+    private static final String BASE_URL = "http://10.0.2.2/adopciones_api/messages/";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat);
+
+        // Obtener datos del usuario actual
+        SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
+        currentUserId = prefs.getInt("user_id", -1);
+        currentUserRole = prefs.getString("user_role", "user");
+
+        // Si es admin, obtener el userId del intent
+        if ("admin".equals(currentUserRole)) {
+            otherUserId = getIntent().getIntExtra("user_id", -1);
+            if (otherUserId == -1) {
+                Toast.makeText(this, "Error: usuario no especificado", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        }
+
+        if (currentUserId == -1) {
+            Toast.makeText(this, "Error: usuario no identificado", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        initViews();
+        setupRecyclerView();
+        setupClickListeners();
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        loadMessages();
+        setupAutoRefresh();
+    }
+
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        messagesRecycler = findViewById(R.id.messages_recycler);
+        messageInput = findViewById(R.id.message_input);
+        sendButton = findViewById(R.id.send_button);
+        loadingProgress = findViewById(R.id.loading_progress);
+
+        // Configurar toolbar
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        // Si es admin, mostrar nombre del usuario
+        if ("admin".equals(currentUserRole)) {
+            String userName = getIntent().getStringExtra("user_name");
+            if (userName != null) {
+                toolbar.setTitle("Chat con " + userName);
+            }
+        }
+    }
+
+    private void setupRecyclerView() {
+        messagesList = new ArrayList<>();
+        boolean isUserView = "user".equals(currentUserRole);
+        adapter = new MessagesAdapter(messagesList, isUserView);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        messagesRecycler.setLayoutManager(layoutManager);
+        messagesRecycler.setAdapter(adapter);
+    }
+
+    private void setupClickListeners() {
+        sendButton.setOnClickListener(v -> sendMessage());
+    }
+
+    private void setupAutoRefresh() {
+        refreshHandler = new Handler();
+        refreshRunnable = new Runnable() {
+            @Override
+            public void run() {
+                loadMessages();
+                refreshHandler.postDelayed(this, REFRESH_INTERVAL);
+            }
+        };
+        refreshHandler.postDelayed(refreshRunnable, REFRESH_INTERVAL);
+    }
+
+    private void loadMessages() {
+        String url;
+
+        if ("user".equals(currentUserRole)) {
+            // Usuario: obtener chat grupal
+            url = BASE_URL + "getChatForUser.php?user_id=" + currentUserId;
+        } else {
+            // Admin: obtener chat con usuario específico
+            url = BASE_URL + "getChatForAdmin.php?admin_id=" + currentUserId + "&user_id=" + otherUserId;
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        if (response.getBoolean("success")) {
+                            JSONArray messagesArray = response.getJSONArray("messages");
+                            messagesList.clear();
+
+                            for (int i = 0; i < messagesArray.length(); i++) {
+                                JSONObject messageObj = messagesArray.getJSONObject(i);
+                                Message message = parseMessage(messageObj);
+                                messagesList.add(message);
+                            }
+
+                            adapter.updateMessages(messagesList);
+
+                            // Scroll al final
+                            if (messagesList.size() > 0) {
+                                messagesRecycler.smoothScrollToPosition(messagesList.size() - 1);
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    // Silenciar errores de refresh automático
+                });
+
+        requestQueue.add(request);
+    }
+
+    private Message parseMessage(JSONObject obj) throws JSONException {
+        Message message = new Message();
+        message.setId(obj.getInt("id"));
+        message.setSender_id(obj.getInt("sender_id"));
+        message.setReceiver_id(obj.getInt("receiver_id"));
+        message.setMessage(obj.getString("message"));
+        message.setIs_read(obj.getInt("is_read"));
+        message.setCreated_at(obj.getString("created_at"));
+        message.setSender_name(obj.optString("sender_name", ""));
+        message.setSender_role(obj.optString("sender_role", ""));
+
+        // Determinar si es mensaje mío
+        if ("user".equals(currentUserRole)) {
+            message.setIs_mine(obj.optBoolean("is_mine", false));
+            message.setIs_from_admin(obj.optBoolean("is_from_admin", false));
+        } else {
+            message.setIs_mine(obj.optBoolean("is_from_admin", false));
+        }
+
+        return message;
+    }
+
+    private void sendMessage() {
+        String messageText = messageInput.getText().toString().trim();
+
+        if (messageText.isEmpty()) {
+            Toast.makeText(this, "Escribe un mensaje", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        sendButton.setEnabled(false);
+
+        String url = BASE_URL + "sendMessage.php";
+
+        JSONObject params = new JSONObject();
+        try {
+            params.put("sender_id", currentUserId);
+            params.put("message", messageText);
+
+            // Si es admin, agregar receiver_id
+            if ("admin".equals(currentUserRole)) {
+                params.put("receiver_id", otherUserId);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            sendButton.setEnabled(true);
+            return;
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, params,
+                response -> {
+                    try {
+                        if (response.getBoolean("success")) {
+                            messageInput.setText("");
+                            loadMessages(); // Recargar mensajes
+                        } else {
+                            Toast.makeText(this, "Error al enviar mensaje", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    sendButton.setEnabled(true);
+                },
+                error -> {
+                    Toast.makeText(this, "Error al enviar mensaje: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    sendButton.setEnabled(true);
+                });
+
+        requestQueue.add(request);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (refreshHandler != null && refreshRunnable != null) {
+            refreshHandler.removeCallbacks(refreshRunnable);
+        }
+    }
+}
+
