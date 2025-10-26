@@ -417,6 +417,9 @@ public class AdoptionFormActivity extends AppCompatActivity {
             requestData.put("dispuesto_entrenar", adoptionRequest.getDispuestoEntrenar());
             requestData.put("compromiso_largo_plazo", adoptionRequest.getCompromisoLargoPlazo());
 
+            // Log del JSON para debug
+            android.util.Log.d("AdoptionForm", "Enviando solicitud: " + requestData.toString());
+
             // Deshabilitar botón mientras se envía
             btnSubmit.setEnabled(false);
             btnSubmit.setText("Enviando...");
@@ -424,6 +427,7 @@ public class AdoptionFormActivity extends AppCompatActivity {
             AdoptionApiService.createRequest(requestData, new AdoptionApiService.CreateRequestCallback() {
                 @Override
                 public void onSuccess(int requestId, String message) {
+                    android.util.Log.d("AdoptionForm", "Solicitud creada: ID=" + requestId);
                     runOnUiThread(() -> {
                         Toast.makeText(AdoptionFormActivity.this, message, Toast.LENGTH_LONG).show();
                         // Volver a la pantalla principal
@@ -433,6 +437,7 @@ public class AdoptionFormActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(String error) {
+                    android.util.Log.e("AdoptionForm", "Error al crear solicitud: " + error);
                     runOnUiThread(() -> {
                         Toast.makeText(AdoptionFormActivity.this, "Error: " + error, Toast.LENGTH_LONG).show();
                         btnSubmit.setEnabled(true);
@@ -442,6 +447,7 @@ public class AdoptionFormActivity extends AppCompatActivity {
             });
 
         } catch (Exception e) {
+            android.util.Log.e("AdoptionForm", "Exception al preparar solicitud", e);
             Toast.makeText(this, "Error al preparar la solicitud: " + e.getMessage(), Toast.LENGTH_LONG).show();
             btnSubmit.setEnabled(true);
             btnSubmit.setText("Enviar Solicitud");
