@@ -317,7 +317,12 @@ public class SearchFragment extends Fragment {
      */
     private void onPetClick(com.example.adoptmev5.models.Pet pet) {
         Intent intent = new Intent(getContext(), PetDetailActivity.class);
-        intent.putExtra("pet_id", pet.getId());
+
+        // Asegurar que pet_id se pase como String
+        String petId = pet.getId();
+        android.util.Log.d("SearchFragment", "Enviando pet_id: " + petId);
+
+        intent.putExtra("pet_id", petId);
         intent.putExtra("pet_name", pet.getName());
         intent.putExtra("pet_description", pet.getDescripcion());
         intent.putExtra("pet_age", pet.getEdad() + " años");

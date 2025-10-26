@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/tv_form_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Formulario de Adopción"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tv_step_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Paso 1 de 4"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="16dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:progress="25"
+            android:max="100"
+            android:progressTint="#FF6F61"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Step 1: Información Personal -->
+        <include layout="@layout/step1_personal_info" />
+
+        <!-- Step 2: Información del Hogar -->
+        <include layout="@layout/step2_home_info" />
+
+        <!-- Step 3: Experiencia con Mascotas -->
+        <include layout="@layout/step3_pet_experience" />
+
+        <!-- Step 4: Motivación y Compromiso -->
+        <include layout="@layout/step4_motivation" />
+
+        <!-- Botones de Navegación -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_previous"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Anterior"
+                android:backgroundTint="#999999"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Siguiente"
+                android:backgroundTint="#FF6F61"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="8dp" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Enviar Solicitud"
+                android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

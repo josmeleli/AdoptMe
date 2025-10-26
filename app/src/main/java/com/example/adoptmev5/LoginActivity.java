@@ -90,18 +90,36 @@ public class LoginActivity extends AppCompatActivity {
                 if (success) {
                     String token = resp.optString("token", "");
                     JSONObject user = resp.optJSONObject("user");
-                    int userId = user != null ? user.optInt("id", -1) : -1;
 
-                    // Guardar token y user_id
-                    SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
-                    prefs.edit().putString("token", token).putInt("user_id", userId).apply();
+                    if (user != null) {
+                        int userId = user.optInt("id", -1);
+                        String nombres = user.optString("nombres", "");
+                        String apellidos = user.optString("apellidos", "");
+                        String userEmail = user.optString("email", "");
+                        String telefono = user.optString("telefono", "");
+                        String dni = user.optString("dni", "");
 
-                    runOnUiThread(() -> {
-                        Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, NavbarActivity.class);
-                        startActivity(intent);
-                        finish();
-                    });
+                        // Guardar todos los datos del usuario en SharedPreferences
+                        SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("token", token);
+                        editor.putInt("user_id", userId);
+                        editor.putString("nombres", nombres);
+                        editor.putString("apellidos", apellidos);
+                        editor.putString("email", userEmail);
+                        editor.putString("telefono", telefono);
+                        editor.putString("dni", dni);
+                        editor.apply();
+
+                        runOnUiThread(() -> {
+                            Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, NavbarActivity.class);
+                            startActivity(intent);
+                            finish();
+                        });
+                    } else {
+                        showToast("Error: No se recibieron datos del usuario");
+                    }
                 } else {
                     String msg = resp.optString("message", "Credenciales inválidas");
                     showToast(msg);

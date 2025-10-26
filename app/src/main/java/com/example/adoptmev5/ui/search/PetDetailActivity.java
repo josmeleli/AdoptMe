@@ -1,16 +1,27 @@
 package com.example.adoptmev5.ui.search;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.adoptmev5.R;
+import com.example.adoptmev5.api.AdoptionApiService;
+import com.example.adoptmev5.ui.adoption.AdoptionFormActivity;
 
 public class PetDetailActivity extends AppCompatActivity {
+
+    private static final String TAG = "PetDetailActivity";
+    private String petId;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +31,24 @@ public class PetDetailActivity extends AppCompatActivity {
         ImageView petImage = findViewById(R.id.pet_image);
         TextView petName = findViewById(R.id.pet_name);
         TextView petDescription = findViewById(R.id.pet_description);
+        Button btnAdoptNow = findViewById(R.id.btn_adopt_now);
 
         // Nuevos campos
         TextView petAge = findViewById(R.id.pet_age);
         TextView petWeight = findViewById(R.id.pet_weight);
         TextView petHeight = findViewById(R.id.pet_height);
 
+        // Obtener userId de SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
+        userId = prefs.getInt("user_id", 0);
+
         // Recibimos datos desde el intent
+        petId = getIntent().getStringExtra("pet_id");
+
+        // Log de depuración
+        Log.d(TAG, "userId: " + userId);
+        Log.d(TAG, "petId recibido: " + petId);
+
         String name = getIntent().getStringExtra("pet_name");
         String description = getIntent().getStringExtra("pet_description");
         String fotoUrl = getIntent().getStringExtra("pet_foto_url");
@@ -59,6 +81,66 @@ public class PetDetailActivity extends AppCompatActivity {
         if (age != null) petAge.setText(age);
         if (weight != null) petWeight.setText(weight);
         if (height != null) petHeight.setText(height);
+
+        // Configurar botón de adoptar
+        btnAdoptNow.setOnClickListener(v -> {
+            Log.d(TAG, "Botón Adoptar presionado");
+            Log.d(TAG, "userId actual: " + userId);
+            Log.d(TAG, "petId actual: " + petId);
+
+            if (userId == 0) {
+                Toast.makeText(this, "Debes iniciar sesión para adoptar", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (petId == null || petId.isEmpty()) {
+                Log.e(TAG, "ERROR: petId es null o vacío");
+                Toast.makeText(this, "Error: ID de mascota no válido (petId: " + petId + ")", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // Verificar si puede aplicar
+            checkCanApply();
+        });
+    }
+
+    /**
+     * Verificar si el usuario puede aplicar a esta mascota
+     */
+    private void checkCanApply() {
+        // Convertir petId a int para la API
+        int petIdInt;
+        try {
+            petIdInt = Integer.parseInt(petId);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Error: ID de mascota inválido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AdoptionApiService.checkActiveRequest(userId, petIdInt, new AdoptionApiService.CheckRequestCallback() {
+            @Override
+            public void onSuccess(boolean canApply, String message, boolean hasActiveRequest) {
+                runOnUiThread(() -> {
+                    if (canApply) {
+                        // Abrir formulario de adopción
+                        Intent intent = new Intent(PetDetailActivity.this, AdoptionFormActivity.class);
+                        intent.putExtra("user_id", userId);
+                        intent.putExtra("pet_id", petIdInt);
+                        intent.putExtra("pet_name", getIntent().getStringExtra("pet_name"));
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(PetDetailActivity.this, message, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(() -> {
+                    Toast.makeText(PetDetailActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
 
     /**

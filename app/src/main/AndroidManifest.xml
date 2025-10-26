@@ -46,6 +46,10 @@
         <activity android:name=".ui.search.PetDetailActivity"
             android:exported="false" />
 
+        <!-- Formulario de Adopción -->
+        <activity android:name=".ui.adoption.AdoptionFormActivity"
+            android:exported="false" />
+
     <!-- Navbar -->
     <activity
         android:name=".NavbarActivity"
