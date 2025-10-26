@@ -93,6 +93,7 @@ public class AdoptionApiService {
             try {
                 String urlString = BASE_URL + "/adoptions/createRequest.php";
                 Log.d(TAG, "Creando solicitud: " + urlString);
+                Log.d(TAG, "Request data: " + requestData.toString());
 
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -111,10 +112,13 @@ public class AdoptionApiService {
                 int responseCode = conn.getResponseCode();
                 Log.d(TAG, "Response code: " + responseCode);
 
+                // Leer respuesta
                 BufferedReader reader;
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (responseCode >= 200 && responseCode < 300) {
+                    // Códigos 2xx son éxito (200 OK, 201 Created, etc.)
                     reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 } else {
+                    // Otros códigos son error
                     reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 }
 
@@ -125,24 +129,45 @@ public class AdoptionApiService {
                 }
                 reader.close();
 
-                Log.d(TAG, "Response: " + response.toString());
+                String responseBody = response.toString();
+                Log.d(TAG, "Response body: " + responseBody);
 
-                JSONObject json = new JSONObject(response.toString());
+                // Validar que la respuesta no esté vacía
+                if (responseBody.isEmpty()) {
+                    Log.e(TAG, "Respuesta vacía del servidor");
+                    callback.onError("Respuesta vacía del servidor");
+                    conn.disconnect();
+                    return;
+                }
+
+                // Parsear respuesta JSON
+                JSONObject json;
+                try {
+                    json = new JSONObject(responseBody);
+                } catch (Exception e) {
+                    Log.e(TAG, "Error al parsear JSON: " + e.getMessage());
+                    callback.onError("Error al procesar respuesta del servidor: " + responseBody);
+                    conn.disconnect();
+                    return;
+                }
+
                 boolean success = json.optBoolean("success", false);
 
-                if (success) {
+                if (success && (responseCode >= 200 && responseCode < 300)) {
                     int requestId = json.optInt("request_id", 0);
                     String message = json.optString("message", "Solicitud enviada exitosamente");
+                    Log.d(TAG, "Solicitud creada exitosamente. ID: " + requestId);
                     callback.onSuccess(requestId, message);
                 } else {
-                    String errorMessage = json.optString("message", "Error desconocido");
+                    String errorMessage = json.optString("message", "Error al procesar la solicitud");
+                    Log.e(TAG, "Error del servidor: " + errorMessage);
                     callback.onError(errorMessage);
                 }
 
                 conn.disconnect();
             } catch (Exception e) {
                 Log.e(TAG, "Error al crear solicitud: ", e);
-                callback.onError("Error: " + e.getMessage());
+                callback.onError("Error de conexión: " + e.getMessage());
             }
         }).start();
     }
