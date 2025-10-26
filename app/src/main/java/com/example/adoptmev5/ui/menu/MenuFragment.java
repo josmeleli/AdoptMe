@@ -8,18 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.adoptmev5.AdminUsersListActivity;
+import com.example.adoptmev5.LoginActivity;
 import com.example.adoptmev5.R;
 import com.example.adoptmev5.UserChatActivity;
 
 public class MenuFragment extends Fragment {
 
-    private LinearLayout menuHelp;
+    private LinearLayout menuCompatibilityTest, menuProfile, menuSettings, menuHelp, menuAbout, menuLogout;
     private TextView userName;
     private SharedPreferences prefs;
 
@@ -38,8 +40,13 @@ public class MenuFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        menuHelp = view.findViewById(R.id.menu_help);
         userName = view.findViewById(R.id.user_name);
+        menuCompatibilityTest = view.findViewById(R.id.menu_compatibility_test);
+        menuProfile = view.findViewById(R.id.menu_profile);
+        menuSettings = view.findViewById(R.id.menu_settings);
+        menuHelp = view.findViewById(R.id.menu_help);
+        menuAbout = view.findViewById(R.id.menu_about);
+        menuLogout = view.findViewById(R.id.menu_logout);
     }
 
     private void setupUserInfo() {
@@ -53,8 +60,37 @@ public class MenuFragment extends Fragment {
     }
 
     private void setupListeners() {
+        if (menuCompatibilityTest != null) {
+            menuCompatibilityTest.setOnClickListener(v ->
+                Toast.makeText(requireContext(), "Test de Compatibilidad", Toast.LENGTH_SHORT).show()
+            );
+        }
+
+        if (menuProfile != null) {
+            menuProfile.setOnClickListener(v -> {
+                Intent intent = new Intent(requireContext(), EditProfileActivity.class);
+                startActivity(intent);
+            });
+        }
+
+        if (menuSettings != null) {
+            menuSettings.setOnClickListener(v ->
+                Toast.makeText(requireContext(), "Configuración", Toast.LENGTH_SHORT).show()
+            );
+        }
+
         if (menuHelp != null) {
             menuHelp.setOnClickListener(v -> openChatBasedOnRole());
+        }
+
+        if (menuAbout != null) {
+            menuAbout.setOnClickListener(v ->
+                Toast.makeText(requireContext(), "Acerca de AdoptMe", Toast.LENGTH_SHORT).show()
+            );
+        }
+
+        if (menuLogout != null) {
+            menuLogout.setOnClickListener(v -> logout());
         }
     }
 
@@ -71,6 +107,17 @@ public class MenuFragment extends Fragment {
         }
 
         startActivity(intent);
+    }
+
+    private void logout() {
+        // Limpiar SharedPreferences
+        prefs.edit().clear().apply();
+
+        // Ir a LoginActivity
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        requireActivity().finish();
     }
 }
 

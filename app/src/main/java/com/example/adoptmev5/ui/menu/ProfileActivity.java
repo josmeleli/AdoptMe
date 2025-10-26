@@ -9,11 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.adoptmev5.LoginActivity;
 import com.example.adoptmev5.R;
@@ -26,11 +22,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ProfileActivity extends AppCompatActivity {
-
     private static final String BASE_URL = "http://10.0.2.2/adopciones_api";
 
-    private TextView textViewUserName, textViewProfileStatus;
     private ImageView imageViewEditProfile;
+    private TextView textViewUserName, textViewProfileStatus;
     private LinearLayout optionCompatibility, optionPreferences, optionMyProfile,
             optionSettings, optionHelp, optionAbout, optionLogout;
 
@@ -39,15 +34,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        // Obtener user_id
+        // Obtener userId de SharedPreferences
         SharedPreferences prefs = getSharedPreferences("adoptme_prefs", MODE_PRIVATE);
         userId = prefs.getInt("user_id", -1);
 
@@ -65,92 +54,62 @@ public class ProfileActivity extends AppCompatActivity {
         optionLogout = findViewById(R.id.option_logout);
 
         // Cargar datos del usuario
-        loadUserData();
+        loadUserProfile();
 
-        // Click en el lápiz de editar
-        imageViewEditProfile.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-            startActivity(intent);
-        });
-
-        // Listeners de las opciones
-        optionCompatibility.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, CompatibilityActivity.class);
-            startActivity(intent);
-        });
-
-        optionPreferences.setOnClickListener(v -> {
-            // Abrir pantalla de preferencias (FilterActivity)
-            Intent intent = new Intent(ProfileActivity.this, FilterActivity.class);
-            startActivity(intent);
-        });
-
-        optionMyProfile.setOnClickListener(v -> {
-            // Abrir edición de perfil
-            Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-            startActivity(intent);
-        });
-
-        optionSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        });
-
-        optionHelp.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, HelpActivity.class);
-            startActivity(intent);
-        });
-
-        optionAbout.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, AboutActivity.class);
-            startActivity(intent);
-        });
-
+        // Configurar listeners
         optionLogout.setOnClickListener(v -> logout());
+
+        // Otras opciones (implementar según necesites)
+        optionMyProfile.setOnClickListener(v ->
+            Toast.makeText(this, "Perfil", Toast.LENGTH_SHORT).show()
+        );
+
+        optionSettings.setOnClickListener(v ->
+            Toast.makeText(this, "Configuración", Toast.LENGTH_SHORT).show()
+        );
+
+        optionHelp.setOnClickListener(v ->
+            Toast.makeText(this, "Ayuda", Toast.LENGTH_SHORT).show()
+        );
+
+        optionAbout.setOnClickListener(v ->
+            Toast.makeText(this, "Acerca de", Toast.LENGTH_SHORT).show()
+        );
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Recargar datos cuando vuelva de EditProfileActivity
-        loadUserData();
-    }
-
-    private void loadUserData() {
+    private void loadUserProfile() {
         if (userId == -1) {
             textViewUserName.setText("Usuario AdoptMe");
-            textViewProfileStatus.setText("Inicia sesión para ver tu perfil");
+            textViewProfileStatus.setText("Error: Sesión no válida");
             return;
         }
 
         new Thread(() -> {
             try {
-                URL url = new URL(BASE_URL + "/users/getUser.php?user_id=" + userId);
+                URL url = new URL(BASE_URL + "/users/getUser.php?id=" + userId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                conn.setConnectTimeout(10000);
-                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(5000);
 
-                int code = conn.getResponseCode();
-                if (code == 200) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                    StringBuilder sb = new StringBuilder();
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder response = new StringBuilder();
                     String line;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
                     }
-                    br.close();
+                    reader.close();
 
-                    JSONObject response = new JSONObject(sb.toString());
+                    JSONObject jsonResponse = new JSONObject(response.toString());
 
-                    // Actualizar UI
                     runOnUiThread(() -> {
-                        String nombres = response.optString("nombres", "");
-                        String apellidos = response.optString("apellidos", "");
+                        String nombres = jsonResponse.optString("nombres", "");
+                        String apellidos = jsonResponse.optString("apellidos", "");
                         String fullName = (nombres + " " + apellidos).trim();
 
                         if (fullName.isEmpty()) {
-                            fullName = response.optString("email", "Usuario AdoptMe");
+                            fullName = jsonResponse.optString("email", "Usuario AdoptMe");
                         }
 
                         textViewUserName.setText(fullName);

@@ -518,7 +518,9 @@
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -573,7 +575,9 @@
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -635,7 +639,9 @@
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="40dp"
